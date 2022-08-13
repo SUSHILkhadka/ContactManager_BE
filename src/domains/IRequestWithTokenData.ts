@@ -1,6 +1,6 @@
-import { Request } from "express";
+import { Request } from 'express';
 
-export interface IRequestWithTokenData extends Request{
-    id?: number,
-    email?: string,
+export interface IRequestWithTokenData extends Request {
+  id?: number;
+  email?: string;
 }

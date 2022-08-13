@@ -25,5 +25,18 @@ class User {
     const users = await db(this.table).select().returning('*');
     return users;
   }
+
+  public static async updateUser(user: IUser): Promise<IUser[]> {
+    const updatedUser = await db(this.table).where('id', user.id).update(user).returning('*');
+    console.log('updateUser = ', updatedUser);
+
+    return updatedUser;
+  }
+  public static async deleteUser(id: number): Promise<IUser[]> {
+    const deletedUser = await db(this.table).where('id', id).del();
+    console.log('deleteUser = ', deletedUser);
+    const users = await db(this.table).select();
+    return users;
+  }
 }
 export default User;

@@ -1,11 +1,10 @@
 import db from '../db/db';
 import IRefreshToken from '../domains/IRefreshToken';
 
-class RefreshTokenModel
- {
+class RefreshTokenModel {
   public static table = 'refresh_token';
   public static async getAllRefreshTokens(): Promise<IRefreshToken[]> {
-    const refreshTokens = await db(this.table).select().returning("*");
+    const refreshTokens = await db(this.table).select().returning('*');
     return refreshTokens;
   }
 
@@ -20,7 +19,7 @@ class RefreshTokenModel
   }
 
   public static async deleteRefreshTokenByToken(refreshToken: string): Promise<IRefreshToken[]> {
-    const deletedRefreshToken = await db(this.table).where('refreshToken', refreshToken).del().returning("*");
+    const deletedRefreshToken = await db(this.table).where('refreshToken', refreshToken).del().returning('*');
     const remainingRefreshToken = await db(this.table).select();
     console.log('after deletion', deletedRefreshToken);
     return remainingRefreshToken;
