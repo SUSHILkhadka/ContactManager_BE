@@ -1,7 +1,7 @@
-interface IRefreshToken{
-    refreshToken: string,
-    id: number,
-    expiresAt: Date
+interface IRefreshToken {
+  refreshToken: string;
+  id: number;
+  expiresAt: Date;
 }
 
 export default IRefreshToken;
