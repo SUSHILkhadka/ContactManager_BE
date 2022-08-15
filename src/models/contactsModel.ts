@@ -4,9 +4,9 @@ import { IContact, IContactToInsert } from '../domains/IContact';
 class Contact {
   private static table = 'contacts';
 
-  public static async createContact(contactToInsert: IContactToInsert): Promise<IContact[]> {
+  public static async createContact(contactToInsert: IContactToInsert): Promise<IContact> {
     const contact = await db(this.table).insert(contactToInsert).returning('*');
-    return contact;
+    return contact[0];
   }
 
   public static async getAllContactsByUserId(userId: number): Promise<IContact[]> {
@@ -22,11 +22,11 @@ class Contact {
     console.log('updateUser = ', updatedContact);
     return updatedContact;
   }
-  public static async deleteContact(userId: number, id: number): Promise<IContact[]> {
+  public static async deleteContact(userId: number, id: number): Promise<IContact> {
     const _deletedContact = await db(this.table).where({ userId: userId, id: id }).del().returning('*');
     console.log(_deletedContact);
-    const remainingContacts = await db(this.table).select();
-    return remainingContacts;
+    // const remainingContacts = await db(this.table).select();
+    return _deletedContact[0];
   }
 
   public static async getContactByUserIdAndPhoneNumber(userId: number, phoneNumber: number): Promise<IContact> {
