@@ -29,9 +29,5 @@ class Contact {
     return _deletedContact[0];
   }
 
-  public static async getContactByUserIdAndPhoneNumber(userId: number, phoneNumber: number): Promise<IContact> {
-    const contact = await db(this.table).where({ userId: userId, phoneNumber: phoneNumber }).returning('*').first();
-    return contact;
-  }
 }
 export default Contact;

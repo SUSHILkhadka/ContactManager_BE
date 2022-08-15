@@ -18,6 +18,7 @@ const authenticate = async (req: IRequestWithTokenData, res: Response, next: Nex
     req.email = dataAtToken.email;
     return next();
   } catch {
+    console.log('ff')
     const err = new CustomError('invalid access token', StatusCodes.FORBIDDEN);
     return next(err);
   }
