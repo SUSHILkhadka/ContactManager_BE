@@ -19,7 +19,7 @@ export const login = async (email: string, password: string): Promise<ITokens<Us
   }
   const isPasswordMatch = await bcrypt.compare(password, user.password);
   if (!isPasswordMatch) {
-    throw new CustomError('wrong password', StatusCodes.BAD_REQUEST);
+    throw new CustomError('wrong password', StatusCodes.UNAUTHORIZED);
   }
 
   //valid user

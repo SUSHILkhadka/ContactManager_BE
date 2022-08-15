@@ -31,14 +31,14 @@ export const getAllUsers = (req: Request, res: Response, next: NextFunction) => 
     .catch((err) => next(err));
 };
 export const updateUser = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
-  const { name, password } = req.body;
+  const { name, password, oldPassword } = req.body;
   const id = req.id;
   const email = req.email;
   if (!id || !email) {
     return next(new CustomError('id and email in token for updating is required', StatusCodes.BAD_REQUEST));
   }
 
-  UserService.updateUser({ name, password, id, email })
+  UserService.updateUser({ name, password, id, email }, oldPassword)
     .then((data) => res.json(data))
     .catch((err) => next(err));
 };

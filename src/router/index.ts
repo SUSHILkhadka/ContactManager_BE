@@ -6,6 +6,7 @@ import tokenRouter from './tokenRouter';
 import logoutRouter from './logoutRouter';
 import userRouter from './userRouter';
 import contactRouter from './contactRouter';
+import uploadRouter from './uploadRouter';
 
 const router = Router();
 router.use('/register', registerRouter);
@@ -14,6 +15,7 @@ router.use('/token', tokenRouter);
 router.use('/logout', logoutRouter);
 
 router.use(authenticate);
+router.use('/upload', uploadRouter);
 router.use('/user', userRouter);
 router.use('/contact', contactRouter);
 

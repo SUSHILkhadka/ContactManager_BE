@@ -5,6 +5,7 @@ import UserModel from '../models/userModel';
 import logger from '../misc/Logger';
 import CustomError from '../middlewares/CustomError';
 import { generatePasswordHash } from '../utils/passwordUtils';
+import bcrypt from 'bcrypt';
 
 export const createUser = async (userToInsert: IUserToInsert): Promise<ISuccess<IUser>> => {
   const { password } = userToInsert;
@@ -48,7 +49,14 @@ export const getAllUsers = async (): Promise<ISuccess<IUser>> => {
   };
 };
 
-export const updateUser = async (user: IUser): Promise<ISuccess<IUser>> => {
+export const updateUser = async (user: IUser, oldPassword: string): Promise<ISuccess<IUser>> => {
+  const userForCheck = await UserModel.getUserByEmail(user.email);
+  const isPasswordMatch = await bcrypt.compare(oldPassword, userForCheck.password);
+  if (!isPasswordMatch) {
+    throw new CustomError('wrong password', StatusCodes.UNAUTHORIZED);
+  }
+  //entered correct old password for changing name or password or both
+
   const password = user.password;
   const passwordHash = await generatePasswordHash(password);
   logger.info('updating user =>userService.updateUser');
