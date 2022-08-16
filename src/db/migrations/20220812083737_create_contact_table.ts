@@ -5,9 +5,9 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id');
     // table.string('email').notNullable();
     table.string('name').notNullable();
-    table.string('phoneNumber').notNullable();
-    table.string('photograph').notNullable();
-    table.boolean('favourite').notNullable();
+    table.string('phoneNumber');
+    table.string('photograph');
+    table.boolean('favourite').defaultTo(false);
     table.integer('userId').unsigned().notNullable();
     table.foreign('userId').references('id').inTable('user_account').onDelete('CASCADE');
   });

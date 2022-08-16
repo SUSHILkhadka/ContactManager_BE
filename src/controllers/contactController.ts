@@ -5,12 +5,12 @@ import CustomError from '../middlewares/CustomError';
 import * as ContactService from '../services/contactService';
 
 export const createContact = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
-  const { name, phoneNumber, photograph, favourite } = req.body;
+  const { name,email,workNumber,homeNumber, phoneNumber, photograph, favourite } = req.body;
   const userId = req.id;
   if (!userId) {
     return next(new CustomError('id of user in token data is required', StatusCodes.BAD_REQUEST));
   }
-  ContactService.createContact({ name, phoneNumber, photograph, favourite, userId })
+  ContactService.createContact({ name, email, workNumber,homeNumber,  phoneNumber, photograph, favourite, userId })
     .then((data) => res.json(data))
     .catch((err) => next(err));
 };
@@ -25,13 +25,13 @@ export const getAllContactsByUserId = (req: IRequestWithTokenData, res: Response
     .catch((err) => next(err));
 };
 export const updateContact = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
-  const { name, phoneNumber, photograph, favourite } = req.body;
+  const { name,email,workNumber,homeNumber,  phoneNumber, photograph, favourite } = req.body;
   const userId = req.id;
   const id = req.params.contactId;
   if (!userId || !id) {
     return next(new CustomError('id of user in token data is required', StatusCodes.BAD_REQUEST));
   }
-  ContactService.updateContact({ name, phoneNumber, photograph, favourite, userId, id: +id })
+  ContactService.updateContact({ name, email,workNumber,homeNumber,  phoneNumber, photograph, favourite, userId, id: +id })
     .then((data) => res.json(data))
     .catch((err) => next(err));
 };
