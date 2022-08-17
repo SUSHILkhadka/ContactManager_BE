@@ -32,7 +32,7 @@ export const getAccessToken = (req: Request, res: Response, next: NextFunction) 
 export const logout = (req: Request, res: Response, next: NextFunction) => {
   const { refreshToken } = req.body;
   if (!refreshToken) {
-    throw new CustomError('refreshToken is required', StatusCodes.BAD_REQUEST);
+    throw new CustomError('refreshToken is required', StatusCodes.OK);
   }
   LoginService.logout(refreshToken)
     .then((data) => res.json(data))
