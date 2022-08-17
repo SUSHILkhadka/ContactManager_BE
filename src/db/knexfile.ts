@@ -46,7 +46,7 @@ const config: { [key: string]: Knex.Config } = {
       port: 5432,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      ssl: {rejectUnauthorized: false}
+      ssl: true,
     },
     pool: {
       min: 2,
