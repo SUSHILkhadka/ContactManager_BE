@@ -12,8 +12,8 @@
     "prettify": "prettier --single-quote --print-width 120 --write {src,test}/**/*.ts",
     "format:code": "run-s lint:fix prettify",
     "migrate:make": "knex migrate:make --migrations-directory src/db/migrations -x ts",
-    "migrate": " knex migrate:latest --knexfile src/db/knexfile.ts",
-    "migrate:prod": " knex migrate:latest --knexfile dist/db/knexfile.js",
+    "migrate": "knex migrate:latest --knexfile src/db/knexfile.ts",
+    "migrate:prod": "knex migrate:latest --knexfile dist/db/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile src/db/knexfile.ts"
   },
   "keywords": [
