@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import CustomError from '../middlewares/CustomError';
-import * as LoginService from '../services/LoginService';
+import * as LoginService from '../services/loginService';
 
 /**
  * 
