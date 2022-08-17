@@ -8,7 +8,12 @@ import cors from 'cors';
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
-
+app.options('*', cors)
+// app.enableCors({
+//   origin: true,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+//   credentials: true,
+// }); 
 app.use(appRouter);
 app.use(notFound); 
 app.use(errorHandler);
