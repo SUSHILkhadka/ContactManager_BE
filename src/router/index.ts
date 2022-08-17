@@ -17,6 +17,6 @@ router.use('/logout', logoutRouter);
 router.use(authenticate);
 router.use('/upload', uploadRouter);
 router.use('/user', userRouter);
-router.use('/contact', contactRouter);
+router.use('/contacts', contactRouter);
 
 export default router;

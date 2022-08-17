@@ -25,17 +25,12 @@ export const getUserByEmail = (req: Request, res: Response, next: NextFunction) 
     .catch((err) => next(err));
 };
 
-export const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
-  UserService.getAllUsers()
-    .then((data) => res.json(data))
-    .catch((err) => next(err));
-};
 export const updateUser = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
   const { name, password, oldPassword } = req.body;
   const id = req.id;
   const email = req.email;
   if (!id || !email) {
-    return next(new CustomError('id and email in token for updating is required', StatusCodes.BAD_REQUEST));
+    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
   }
 
   UserService.updateUser({ name, password, id, email }, oldPassword)
@@ -45,7 +40,7 @@ export const updateUser = (req: IRequestWithTokenData, res: Response, next: Next
 export const deleteUser = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
   const id = req.id;
   if (!id) {
-    return next(new CustomError('id in tokendata is required', StatusCodes.BAD_REQUEST));
+    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
   }
   UserService.deleteUser(id)
     .then((data) => res.json(data))

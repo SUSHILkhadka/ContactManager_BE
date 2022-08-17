@@ -13,16 +13,14 @@ class RefreshTokenModel {
     return refreshTokenDataFromDb;
   }
 
-  public static async createRefreshToken(refreshTokenForDb: IRefreshToken): Promise<IRefreshToken[]> {
+  public static async createRefreshToken(refreshTokenForDb: IRefreshToken): Promise<IRefreshToken> {
     const addedRefreshToken = await db(this.table).insert(refreshTokenForDb).returning('*');
-    return addedRefreshToken;
+    return addedRefreshToken[0];
   }
 
-  public static async deleteRefreshTokenByToken(refreshToken: string): Promise<IRefreshToken[]> {
+  public static async deleteRefreshTokenByToken(refreshToken: string): Promise<IRefreshToken> {
     const deletedRefreshToken = await db(this.table).where('refreshToken', refreshToken).del().returning('*');
-    const remainingRefreshToken = await db(this.table).select();
-    console.log('after deletion', deletedRefreshToken);
-    return remainingRefreshToken;
+    return deletedRefreshToken[0];
   }
 }
 

@@ -3,6 +3,7 @@ export interface ITokens<T> {
   accessToken?: string;
   refreshToken?: string;
   expiresAt?: string;
+  expiresAtRefreshToken?: number;
   message: string;
 }
 
