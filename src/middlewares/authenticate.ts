@@ -5,21 +5,27 @@ import { IDataAtToken } from '../domains/IDataAtToken';
 import { IRequestWithTokenData } from '../domains/IRequestWithTokenData';
 import CustomError from './CustomError';
 
+
+/**
+ * 
+ * @param req user Request with access token in header
+ * @param res Response
+ * @param next NextFunction
+ * @returns next function if access token is valid and adds token data to request.
+ */
 const authenticate = async (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
   if (!req.headers.authorization) {
-    // throw new CustomError("need token",StatusCodes.FORBIDDEN);
-    const err = new CustomError('need token in header', StatusCodes.UNAUTHORIZED);
+    const err = new CustomError('invalid access token', StatusCodes.UNAUTHORIZED);
     return next(err);
   }
-  const accessToken = req.headers.authorization.split(' ')[1];
   try {
-    const dataAtToken = (await jwt.verify(accessToken, process.env.JWT_SECRET as string)) as IDataAtToken;
+  const accessToken = req.headers.authorization.split(' ')[1];
+    const dataAtToken =  jwt.verify(accessToken, process.env.JWT_SECRET as string) as IDataAtToken;
     req.id = dataAtToken.id;
     req.email = dataAtToken.email;
     return next();
   } catch {
-    console.log('ff')
-    const err = new CustomError('invalid access token', StatusCodes.FORBIDDEN);
+    const err = new CustomError('invalid access token', StatusCodes.UNAUTHORIZED);
     return next(err);
   }
 };

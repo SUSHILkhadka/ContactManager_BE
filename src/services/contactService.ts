@@ -19,7 +19,6 @@ export const getAllContactsByUserId = async (userId: number): Promise<ISuccess<I
   logger.info('getting all contacts by userId =>contactService.getAllContactsByUserId');
 
   const contacts = await ContactsModel.getAllContactsByUserId(userId);
-  console.log(contacts);
   if (!contacts.length) {
     throw new CustomError("Contacts  doesn't exists", StatusCodes.NOT_FOUND);
   }
@@ -30,15 +29,15 @@ export const getAllContactsByUserId = async (userId: number): Promise<ISuccess<I
   };
 };
 
-export const updateContact = async (contact: IContact): Promise<ISuccess<IContact[]>> => {
+export const updateContact = async (contact: IContact): Promise<ISuccess<IContact>> => {
   logger.info('updating contact by userId from token data and id =>contactService.updateContact');
-  const contacts = await ContactsModel.updateContact(contact);
-  if (!contacts.length) {
+  const updatedContact = await ContactsModel.updateContact(contact);
+  if (!updatedContact) {
     throw new CustomError("Contacts  doesn't exists to edit", StatusCodes.NOT_FOUND);
   }
   logger.info('updated contacts by userId and id successfully =>contactService.updateContact');
   return {
-    data: contacts,
+    data: updatedContact,
     message: 'updated contact by userId and id successfully',
   };
 };
@@ -47,7 +46,7 @@ export const deleteContact = async (userId: number, id: number): Promise<ISucces
   logger.info('updating contact by userId from token data and id =>contactService.updateContact');
   const contact = await ContactsModel.deleteContact(userId, id);
   if (!contact) {
-    throw new CustomError('Couldnot delte the requested contact', StatusCodes.NOT_FOUND);
+    throw new CustomError('Couldnot delete the requested contact', StatusCodes.NOT_FOUND);
   }
   logger.info('deleted contacts by userId and id successfully =>contactService.updateContact');
   return {

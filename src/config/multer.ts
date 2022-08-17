@@ -1,5 +1,6 @@
 import multer from 'multer';
 
+//local disk storage configuration for multer
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {

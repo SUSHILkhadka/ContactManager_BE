@@ -36,18 +36,6 @@ export const getUserByEmail = async (email: string): Promise<ISuccess<IUser>> =>
   };
 };
 
-export const getAllUsers = async (): Promise<ISuccess<IUser>> => {
-  logger.info('getting user by email =>userService.getUserByEmail');
-  const user = await UserModel.getAllUsers();
-  if (!user) {
-    throw new CustomError("user account doesn't exists", StatusCodes.NOT_FOUND);
-  }
-  logger.info('got user by email successfully =>userService.getUserByEmail');
-  return {
-    data: user,
-    message: 'user by email fetched successfully',
-  };
-};
 
 export const updateUser = async (user: IUser, oldPassword: string): Promise<ISuccess<IUser>> => {
   const userForCheck = await UserModel.getUserByEmail(user.email);
@@ -69,13 +57,13 @@ export const updateUser = async (user: IUser, oldPassword: string): Promise<ISuc
   };
 };
 
-export const deleteUser = async (id: number): Promise<ISuccess<IUser[]>> => {
+export const deleteUser = async (id: number): Promise<ISuccess<IUser>> => {
   logger.info('deleting user =>userService.deleteUser');
-  const listAfterDeletionUser = await UserModel.deleteUser(id);
+  const deletedUser = await UserModel.deleteUser(id);
   logger.info('deleted user successfully =>userService.deleteUser');
 
   return {
-    data: listAfterDeletionUser,
+    data: deletedUser,
     message: 'user by id deleted successfully',
   };
 };

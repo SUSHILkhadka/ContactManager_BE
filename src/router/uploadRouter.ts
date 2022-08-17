@@ -7,8 +7,21 @@ import upload from '../config/multer';
 import fs from 'fs';
 
 const router = Router();
+
+/**
+ * request has data in multipart/form data form
+ * multer's upload.array middleware combines these into single file in server's disk or memory storage.
+ * after new file is formed locally, uploadfiles then uploads this whole file to cloud.
+ */
 router.post('/', upload.array('keyForFileObject'), uploadFiles);
 
+/**
+ * 
+ * @param req user's request with files
+ * @param res response of server
+ * @param next next function
+ * @returns url of file after uploading to cloud and deleting local file.
+ */
 async function uploadFiles(req: any, res: Response, next: NextFunction) {
   try {
     logger.info('uploading image to cloudinary');

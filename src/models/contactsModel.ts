@@ -14,20 +14,17 @@ class Contact {
     return contacts;
   }
 
-  public static async updateContact(contact: IContact): Promise<IContact[]> {
+  public static async updateContact(contact: IContact): Promise<IContact> {
     const updatedContact = await db(this.table)
       .where({ userId: contact.userId, id: contact.id })
       .update(contact)
       .returning('*');
-    console.log('updateUser = ', updatedContact);
-    return updatedContact;
-  }
-  public static async deleteContact(userId: number, id: number): Promise<IContact> {
-    const _deletedContact = await db(this.table).where({ userId: userId, id: id }).del().returning('*');
-    console.log(_deletedContact);
-    // const remainingContacts = await db(this.table).select();
-    return _deletedContact[0];
+    return updatedContact[0];
   }
 
+  public static async deleteContact(userId: number, id: number): Promise<IContact> {
+    const _deletedContact = await db(this.table).where({ userId: userId, id: id }).del().returning('*');
+    return _deletedContact[0];
+  }
 }
 export default Contact;
