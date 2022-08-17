@@ -4,7 +4,7 @@ import multer from 'multer';
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
-      cb(null, `src/assets/uploads`);
+      cb(null, `dist/assets/uploads`);
     } else {
       cb('multer error');
     }

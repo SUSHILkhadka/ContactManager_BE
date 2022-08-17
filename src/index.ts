@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(appRouter);
-app.use(notFound);
+app.use(notFound); 
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
