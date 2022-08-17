@@ -4,8 +4,8 @@
   "description": "Starter template for nodejs with typescript",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "deploy": "node src/dist/index.js",
+    "start": "nodemon",
+    "deploy": "node dist/index.js",
     "build": "tsc",
     "postinstall": "tsc",
     "lint:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,js}' 'test/**/*.{ts,js}'",

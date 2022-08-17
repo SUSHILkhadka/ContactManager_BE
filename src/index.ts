@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import errorHandler from './middlewares/ErrorHandler';
+import errorHandler from './middlewares/errorHandler';
 import { notFound } from './middlewares/notFound';
 import logger from './misc/Logger';
 import appRouter from './router/index';
