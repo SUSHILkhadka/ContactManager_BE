@@ -5,7 +5,7 @@ import logger from '../misc/Logger';
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
-    logger.info('uploading image to cloudinary');
+    logger.info('uploading image to cloudinary kkk');
       cb(null, `dist/assets/uploads`);
     } else {
       cb('multer error');
