@@ -1,9 +1,11 @@
 import multer from 'multer';
+import logger from '../misc/Logger';
 
 //local disk storage configuration for multer
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
+    logger.info('uploading image to cloudinary');
       cb(null, `src/assets/uploads`);
     } else {
       cb('multer error');
