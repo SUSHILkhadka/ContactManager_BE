@@ -4,7 +4,6 @@ import CustomError from '../middlewares/CustomError';
 import cloudinary from '../config/cloudinary';
 import logger from '../misc/Logger';
 import upload from '../config/multer';
-import fs from 'fs';
 
 const router = Router();
 
