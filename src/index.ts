@@ -6,17 +6,17 @@ import appRouter from './router/index';
 import cors from 'cors';
 
 const app: Application = express();
-app.use(express.json());
 app.use(cors());
-app.use(cors({origin: /\.herokuapp\.com$/}));
+app.use(express.json());
+// app.use(cors({origin: /\.herokuapp\.com$/}));
 
 
-// app.all('*', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   res.header('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 // app.enableCors({
 //   origin: true,
