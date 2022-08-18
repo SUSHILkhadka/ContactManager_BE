@@ -24,9 +24,7 @@ router.post('/', upload.array('keyForFileObject'), uploadFiles);
 async function uploadFiles(req: any, res: Response, next: NextFunction) {
   try {
 
-
     // for single file
-
     const filePath = req.files[0].path;
   logger.info('uploading file');
 
