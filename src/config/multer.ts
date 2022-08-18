@@ -5,16 +5,21 @@ import logger from '../misc/Logger';
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
-    logger.info('uploading image to cloudinary kkk');
+    logger.info('111111');
       cb(null, `src/assets/uploads`);
     } else {
+    logger.info('1112');
+
       cb('multer error');
     }
   },
   filename: function (req: any, file: any, cb: any) {
     if (file) {
+    logger.info('1113');
+
       cb(null, Date.now() + '_' + file.originalname);
     } else {
+    logger.info('1114');
       cb('multer error');
     }
   },
