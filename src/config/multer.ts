@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
     logger.info('uploading image to cloudinary');
-      cb(null, `src/assets/uploads`);
+      cb(null, `dist/assets/uploads`);
     } else {
       cb('multer error');
     }
