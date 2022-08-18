@@ -5,7 +5,8 @@ import logger from '../misc/Logger';
 const storage = multer.diskStorage({
   destination: function (req: any, file: any, cb: any) {
     if (file) {
-    logger.info('111111');
+    logger.info('111111',file);
+    console.log(file)
       cb(null, `src/assets/uploads`);
     } else {
     logger.info('1112');
