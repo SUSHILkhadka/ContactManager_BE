@@ -32,10 +32,10 @@ async function uploadFiles(req: any, res: Response, next: NextFunction) {
       upload_preset: 'contacts-photo',
     });
     logger.info('successfully uploaded image to cloudinary');
-    fs.unlinkSync(filePath);
+    // fs.unlinkSync(filePath);
     return res.json({ url: uploadResponse.url });
   } catch (e) {
-    fs.unlinkSync(req.files[0].path);
+    // fs.unlinkSync(req.files[0].path);
     logger.error('upload failed');
     return next(new CustomError(`${e}`, StatusCodes.INTERNAL_SERVER_ERROR));
   }
