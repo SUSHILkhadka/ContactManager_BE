@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import errorHandler from './middlewares/errorHandler';
 import { notFound } from './middlewares/notFound';
 import logger from './misc/Logger';
