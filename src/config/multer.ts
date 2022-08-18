@@ -1,5 +1,4 @@
 import multer from 'multer';
-import logger from '../misc/Logger';
 
 //local disk storage configuration for multer
 const storage = multer.diskStorage({
