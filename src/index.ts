@@ -18,17 +18,6 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-// app.enableCors({
-//   origin: true,
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-//   credentials: true,
-// }); 
-// app.use(
-//   cors({
-//       origin: "http://localhost:3000", 
-//       credentials: true,
-//   })
-// );
 app.use(appRouter);
 app.use(notFound); 
 app.use(errorHandler);

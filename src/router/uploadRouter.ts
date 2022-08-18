@@ -24,14 +24,6 @@ router.post('/', upload.array('keyForFileObject'), uploadFiles);
 async function uploadFiles(req: any, res: Response, next: NextFunction) {
   try {
 
-    //for multiple files
-    // req.files.forEach(async (element:any) => {
-    //   const uploadResponse=await cloudinary.uploader.upload(element.path,{
-    //     upload_preset: 'contacts-photo'
-    //   });
-    //   logger.info("successfully uploaded image to cloudinary");
-    // console.log('url = ',uploadResponse.url)
-    // });
 
     // for single file
 
