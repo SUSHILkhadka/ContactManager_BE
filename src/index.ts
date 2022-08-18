@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import errorHandler from './middlewares/errorHandler';
 import { notFound } from './middlewares/notFound';
 import logger from './misc/Logger';
@@ -8,7 +8,9 @@ import cors from 'cors';
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
-app.options('*', cors)
+app.options('/upload',(req:Request,res:Response)=>{
+res.sendStatus(204);
+})
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
