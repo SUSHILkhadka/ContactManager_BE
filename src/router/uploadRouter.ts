@@ -48,6 +48,8 @@ async function uploadFiles(req: any, res: Response, next: NextFunction) {
     return res.json({ url: uploadResponse.url });
   } catch (e) {
     fs.unlinkSync(req.files[0].path);
+    logger.info('in catch');
+
     return next(new CustomError(`${e}`, StatusCodes.INTERNAL_SERVER_ERROR));
   }
 }
