@@ -35,7 +35,7 @@ async function uploadFiles(req: any, res: Response, next: NextFunction) {
 
     // for single file
 
-    const filePath = req.files.path;
+    const filePath = req.files[0].path;
   logger.info('uploading files file=  filepath = ',req);
   console.log("file files = ",req.files," pathhhhh= ",filePath)
 
