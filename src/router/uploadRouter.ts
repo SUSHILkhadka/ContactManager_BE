@@ -4,9 +4,7 @@ import CustomError from '../middlewares/CustomError';
 import cloudinary from '../config/cloudinary';
 import logger from '../misc/Logger';
 import upload from '../config/multer';
-// import fs from "fs"
 const router = Router();
-
 /**
  * request has data in multipart/form data form
  * multer's upload.array middleware combines these into single file in server's disk or memory storage.
@@ -23,7 +21,6 @@ router.post('/', upload.array('keyForFileObject'), uploadFiles);
  */
 async function uploadFiles(req: any, res: Response, next: NextFunction) {
   try {
-
     // for single file
     const filePath = req.files[0].path;
   logger.info('uploading file');
@@ -33,11 +30,10 @@ async function uploadFiles(req: any, res: Response, next: NextFunction) {
     });
     logger.info('successfully uploaded image to cloudinary');
 
-    //heruko auto deletes this file
-    // fs.unlinkSync(filePath);
+    // fs.unlinkSync(filePath);   //when deploying remove this as heroku auto deletes files
     return res.json({ url: uploadResponse.url });
   } catch (e) {
-    
+
     //heruko auto deletes this file
     // fs.unlinkSync(req.files[0].path);
     logger.error('upload failed');

@@ -20,7 +20,7 @@ export const createUser = async (userToInsert: IUserToInsert): Promise<ISuccess<
 
   return {
     data: user,
-    message: 'user by email fetched successfully',
+    message: 'new user registered successfully',
   };
 };
 export const getUserByEmail = async (email: string): Promise<ISuccess<IUser>> => {
