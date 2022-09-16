@@ -35,7 +35,7 @@ export const updateUser = (req: IRequestWithTokenData, res: Response, next: Next
   const email = req.email;
   Validator(req.body,editUserSchema)
   if (!id || !email) {
-    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
+    return next(new CustomError('invalid access token', StatusCodes.UNAUTHORIZED));
   }
 
   UserService.updateUser({ name, password, id, email }, oldPassword)
@@ -45,7 +45,7 @@ export const updateUser = (req: IRequestWithTokenData, res: Response, next: Next
 export const deleteUser = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
   const id = req.id;
   if (!id) {
-    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
+    return next(new CustomError('invalid access token', StatusCodes.UNAUTHORIZED));
   }
   UserService.deleteUser(id)
     .then((data) => res.json(data))

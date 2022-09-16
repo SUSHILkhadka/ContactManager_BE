@@ -25,7 +25,7 @@ export const createContact = (
   if (!userId) {
     return next(
       new CustomError(
-        "id of user in token data is required",
+        "invalid access token",
         StatusCodes.BAD_REQUEST
       )
     );
@@ -53,7 +53,7 @@ export const getAllContactsByUserId = (
   if (!userId) {
     return next(
       new CustomError(
-        "id of user in token data is required",
+        "invalid access token",
         StatusCodes.BAD_REQUEST
       )
     );
@@ -82,7 +82,7 @@ export const updateContact = (
   if (!userId || !id) {
     return next(
       new CustomError(
-        "id of user in token data is required",
+        "invalid access token",
         StatusCodes.BAD_REQUEST
       )
     );
@@ -112,7 +112,7 @@ export const deleteContact = (
   if (!userId || !id) {
     return next(
       new CustomError(
-        "id of user in token data is required",
+        "invalid access token",
         StatusCodes.BAD_REQUEST
       )
     );

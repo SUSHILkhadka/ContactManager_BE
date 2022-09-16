@@ -33,14 +33,14 @@ export const login = async (
 
   //valid user
   const accessToken = jwt.sign(
-    { id: user.id, email: user.email },
+    { id: user.id, name: user.name, email: user.email },
     process.env.JWT_SECRET as string,
     {
       expiresIn: EXPIRY_TIME,
     }
   );
   const refreshToken = jwt.sign(
-    { id: user.id, email: user.email },
+    { id: user.id, name: user.name, email: user.email },
     process.env.JWT_TOKEN_SECRET as string
   );
 
@@ -70,40 +70,36 @@ export const login = async (
 
 export const getAccessToken = async (
   refreshToken: string
-): Promise<ITokens<IRefreshToken>> => {
+): Promise<ITokens<User>> => {
   const refreshTokenFromDb = (await RefreshTokenModel.getRefreshTokenByToken(
     refreshToken
   )) as IRefreshToken;
   if (!refreshTokenFromDb || +refreshTokenFromDb.expiresAt < Date.now()) {
     await RefreshTokenModel.deleteRefreshTokenByToken(refreshToken);
-    throw new CustomError(
-      "refresh token already expired.",
-      StatusCodes.UNAUTHORIZED
-    );
+    throw new CustomError("invalid refresh token", StatusCodes.UNAUTHORIZED);
   }
 
   try {
-    const dataAtToken = (await jwt.verify(
+    const dataAtToken = jwt.verify(
       refreshToken,
       process.env.JWT_TOKEN_SECRET as string
-    )) as IDataAtToken;
-    const { id, email } = dataAtToken;
+    ) as IDataAtToken;
+    const { id, name, email } = dataAtToken;
     const newAccessToken = jwt.sign(
-      { id, email },
+      { id, name, email },
       process.env.JWT_SECRET as string,
       { expiresIn: EXPIRY_TIME }
     );
     return {
-      data: refreshTokenFromDb,
+      data: dataAtToken,
       accessToken: newAccessToken,
+      refreshToken: refreshToken,
       expiresAt: EXPIRY_TIME,
       expiresAtRefreshToken: refreshTokenFromDb.expiresAt,
       message: "got new access token successfully",
     };
   } catch {
-    throw new CustomError(
-      "invalid refresh token although it existed in database. So fetching new accessToken failed"
-    );
+    throw new CustomError("invalid refresh token");
   }
 };
 
