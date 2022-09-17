@@ -1,4 +1,6 @@
-import Knex from 'knex';
-import knexConfig from './knexfile';
-const knex = Knex(knexConfig.development);
+import Knex from "knex";
+import knexConfig from "./knexfile";
+const knex = Knex(knexConfig[`${process.env.NODE_ENV}`]);
 export default knex;
+
+// heroku config:set PGSSLMODE=no-verify
