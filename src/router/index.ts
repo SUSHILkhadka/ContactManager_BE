@@ -13,9 +13,10 @@ router.use('/register', registerRouter);
 router.use('/login', loginRouter);
 router.use('/token', tokenRouter);
 router.use('/logout', logoutRouter);
+router.use('/upload', uploadRouter);
+
 
 router.use(authenticate);
-router.use('/upload', uploadRouter);
 router.use('/user', userRouter);
 router.use('/contacts', contactRouter);
 

@@ -3,9 +3,13 @@ import { StatusCodes } from 'http-status-codes';
 import { IRequestWithTokenData } from '../domains/IRequestWithTokenData';
 import CustomError from '../middlewares/CustomError';
 import * as UserService from '../services/userService';
+import editUserSchema from '../validations/editUserSchema';
+import registerSchema from '../validations/registerSchema';
+import Validator from '../validations/Validator';
 
 export const createUser = (req: Request, res: Response, next: NextFunction) => {
   const { name, email, password } = req.body;
+  Validator(req.body, registerSchema);
 
   if (!name || !email || !password) {
     throw new CustomError('name, email and password are required', StatusCodes.BAD_REQUEST);
@@ -29,8 +33,9 @@ export const updateUser = (req: IRequestWithTokenData, res: Response, next: Next
   const { name, password, oldPassword } = req.body;
   const id = req.id;
   const email = req.email;
+  Validator(req.body,editUserSchema)
   if (!id || !email) {
-    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
+    return next(new CustomError('invalid access token', StatusCodes.UNAUTHORIZED));
   }
 
   UserService.updateUser({ name, password, id, email }, oldPassword)
@@ -40,7 +45,7 @@ export const updateUser = (req: IRequestWithTokenData, res: Response, next: Next
 export const deleteUser = (req: IRequestWithTokenData, res: Response, next: NextFunction) => {
   const id = req.id;
   if (!id) {
-    return next(new CustomError('Invalid access token', StatusCodes.UNAUTHORIZED));
+    return next(new CustomError('invalid access token', StatusCodes.UNAUTHORIZED));
   }
   UserService.deleteUser(id)
     .then((data) => res.json(data))

@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken';
 import { IDataAtToken } from '../domains/IDataAtToken';
 import { IRequestWithTokenData } from '../domains/IRequestWithTokenData';
 import CustomError from './CustomError';
-
-
 /**
  * 
  * @param req user Request with access token in header
