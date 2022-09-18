@@ -20,14 +20,12 @@ export const createContact = (
     photograph,
     favourite,
   } = req.body;
+
   Validator(req.body, contactSchema);
   const userId = req.id;
   if (!userId) {
     return next(
-      new CustomError(
-        "invalid access token",
-        StatusCodes.BAD_REQUEST
-      )
+      new CustomError("invalid access token", StatusCodes.BAD_REQUEST)
     );
   }
   ContactService.createContact({
@@ -52,10 +50,7 @@ export const getAllContactsByUserId = (
   const userId = req.id;
   if (!userId) {
     return next(
-      new CustomError(
-        "invalid access token",
-        StatusCodes.BAD_REQUEST
-      )
+      new CustomError("invalid access token", StatusCodes.BAD_REQUEST)
     );
   }
   ContactService.getAllContactsByUserId(userId)
@@ -81,10 +76,7 @@ export const updateContact = (
   const id = req.params.contactId;
   if (!userId || !id) {
     return next(
-      new CustomError(
-        "invalid access token",
-        StatusCodes.BAD_REQUEST
-      )
+      new CustomError("invalid access token", StatusCodes.BAD_REQUEST)
     );
   }
   ContactService.updateContact({
@@ -111,10 +103,7 @@ export const deleteContact = (
   const id = req.params.contactId;
   if (!userId || !id) {
     return next(
-      new CustomError(
-        "invalid access token",
-        StatusCodes.BAD_REQUEST
-      )
+      new CustomError("invalid access token", StatusCodes.BAD_REQUEST)
     );
   }
   ContactService.deleteContact(userId, +id)
