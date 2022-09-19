@@ -22,6 +22,16 @@ class RefreshTokenModel {
     const deletedRefreshToken = await db(this.table).where('refreshToken', refreshToken).del().returning('*');
     return deletedRefreshToken[0];
   }
+
+  public static async deleteRefreshTokenByUserId(userId: number): Promise<IRefreshToken> {
+    const deletedRefreshToken = await db(this.table).where('id', userId).del().returning('*');
+    return deletedRefreshToken[0];
+  }
+
+  public static async deleteExpiredRefreshTokenByUserId(userId: number): Promise<IRefreshToken> {
+    const deletedRefreshToken = await db(this.table).where('id', userId).andWhere('expiresAt', '<', Date.now()).del().returning('*');
+    return deletedRefreshToken[0];
+  }
 }
 
 export default RefreshTokenModel;
