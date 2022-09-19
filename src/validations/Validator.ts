@@ -1,6 +1,6 @@
-import { StatusCodes } from "http-status-codes";
-import * as yup from "yup";
-import CustomError from "../middlewares/CustomError";
+import { StatusCodes } from 'http-status-codes';
+import * as yup from 'yup';
+import CustomError from '../middlewares/CustomError';
 
 /**
  * inputs: is input object which is to be validated
@@ -14,9 +14,9 @@ const Validator = (inputs: any, schema: yup.ObjectSchema<any>): string[] => {
     });
     return [];
   } catch (err: any) {
-    let allCombinedError: string = "";
+    let allCombinedError = '';
     err.inner.forEach((error: any) => {
-      allCombinedError += error.message + ", ";
+      allCombinedError += error.message + ', ';
     });
     throw new CustomError(allCombinedError, StatusCodes.BAD_REQUEST);
   }
